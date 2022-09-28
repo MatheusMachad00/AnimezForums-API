@@ -4,10 +4,6 @@ type ERRORS = {
   [key: string]: number
 };
 
-type MESSAGE ={
-  [key: string]: string
-}
-
 const ERRORS: ERRORS = {
   unauthorized: 401,
   conflict: 409,
