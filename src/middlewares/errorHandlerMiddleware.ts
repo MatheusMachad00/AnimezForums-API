@@ -2,6 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 
 type ERRORS = {
   [key: string]: number
+};
+
+type MESSAGE ={
+  [key: string]: string
 }
 
 const ERRORS: ERRORS = {
@@ -25,4 +29,4 @@ export default function errorHandlerMiddleware(
   if (!statusCode) statusCode = 500; // any other types
 
   return res.sendStatus(statusCode); // internal server error
-}
+};

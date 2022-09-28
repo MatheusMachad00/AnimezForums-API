@@ -38,10 +38,10 @@ async function checkEmail(email: string) {
 
 async function getUserOrFail(login: TypeNewLogin) {
   const user = await authRepository.checkEmail(login.email);
-  if (!user) throw { type: "unauthorized" };
+  if (!user) throw { type: 'unauthorized', message: 'Wrong email or password' };
 
   const isPasswordValid = bcrypt.compareSync(login.password, user.password);
-  if (!isPasswordValid) throw { type: "unauthorized" };
+  if (!isPasswordValid) throw { type: 'unauthorized', message: 'Wrong email or password' };
 
   return user;
 };
