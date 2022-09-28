@@ -3,7 +3,7 @@ import { TypeNewPostData } from "../types/postTypes";
 
 
 async function createPost(post: TypeNewPostData) {
-  await prisma.post.create({data: post}); 
+  await prisma.post.create({ data: post });
 };
 
 async function giveStar(id: number) {
@@ -15,7 +15,15 @@ async function giveStar(id: number) {
   })
 };
 
+async function findById(id: number) {
+  const result = await prisma.post.findUnique({
+    where: { id },
+  });
+  return result;
+}
+
 export const postRepository = {
   createPost,
-  giveStar
+  giveStar,
+  findById
 };
