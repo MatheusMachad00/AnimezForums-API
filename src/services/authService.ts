@@ -17,14 +17,14 @@ async function signup(signupData: TypeNewUserData) {
   await authRepository.createUser({ ...signupData, password: encryptedPassword });
 };
 
-async function login(login: TypeNewUserData) {
+async function login(login: TypeNewLogin) {
   const KEY_JWT = process.env.JWT_SECRET;
   const data = login;
 
   const isEmailValid = checkEmail(data.email);
   if (!isEmailValid) throw { type: 'conflict', message: 'Email already registered.' };
 
-  const {id, username, email, avatar} = await getUserOrFail(data);
+  const { id, username, email, avatar } = await getUserOrFail(data);
   const token = jwt.sign({ id, username, email, avatar }, String(KEY_JWT));
 
   return token;
@@ -39,7 +39,7 @@ async function checkEmail(email: string) {
 async function getUserOrFail(login: TypeNewLogin) {
   const user = await authRepository.checkEmail(login.email);
   if (!user) throw { type: "unauthorized" };
-  
+
   const isPasswordValid = bcrypt.compareSync(login.password, user.password);
   if (!isPasswordValid) throw { type: "unauthorized" };
 
