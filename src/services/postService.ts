@@ -11,6 +11,11 @@ async function giveStar(id: number) {
   await postRepository.giveStar(id);
 };
 
+async function getPostsByUserId(userId: number) {
+  const result = await postRepository.findPostsByUserId(userId);
+  return result;
+};
+
 async function findByIdOrFail(id: number) {
   const result = await postRepository.findById(id);
   if (!result) throw { type: 'not_found', message: 'Post not found.' };
@@ -20,5 +25,6 @@ async function findByIdOrFail(id: number) {
 
 export const postService = {
   createPost,
-  giveStar
+  giveStar,
+  getPostsByUserId
 };
