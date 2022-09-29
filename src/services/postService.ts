@@ -1,7 +1,6 @@
 import { TypeNewPostData } from "../types/postTypes";
 import { postRepository } from "../repositories/postRepository";
 
-
 async function createPost(post: TypeNewPostData) {
   await postRepository.createPost(post);
 };
