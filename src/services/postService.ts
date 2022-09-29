@@ -1,8 +1,12 @@
-import { TypeNewPostData } from "../types/postTypes";
+import { TypeNewPostData, TypeNewPost } from "../types/postTypes";
 import { postRepository } from "../repositories/postRepository";
+import { animeRepository } from "../repositories/animeRepository";
+import { TypeNewAnimeData } from "../types/animesTypes";
 
-async function createPost(post: TypeNewPostData) {
-  await postRepository.createPost(post);
+async function createPost(post: TypeNewPost, animeName: TypeNewAnimeData) {
+  const animeId: any = checkAnimeAndCreate(animeName);
+  const postData = { ...post, animeId: animeId.id }
+  await postRepository.createPost(postData);
 };
 
 async function giveStar(id: number) {
@@ -22,8 +26,17 @@ async function findByIdOrFail(id: number) {
   return result;
 };
 
+async function checkAnimeAndCreate(animeName: TypeNewAnimeData) {
+  const checkAnime = await animeRepository.findByName(animeName);
+  if (!checkAnime) {
+    await animeRepository.createAnime(animeName);
+    return await animeRepository.findByName(animeName);
+  };
+  return checkAnime;
+};
+
 export const postService = {
   createPost,
   giveStar,
-  getPostsByUserId
+  getPostsByUserId,
 };

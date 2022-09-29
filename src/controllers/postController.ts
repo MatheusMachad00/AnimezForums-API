@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { postService } from '../services/postService';
-import { TypeNewPostData } from '../types/postTypes';
 
-//falta resolver a parte do animeId
+
 async function createPost(req: Request, res: Response) {
   const { verifiedToken } = res.locals;
   const { title, anime, description } = req.body;
@@ -10,10 +9,8 @@ async function createPost(req: Request, res: Response) {
     title,
     description,
     userId: verifiedToken.id,
-    animeId: anime
   };
-
-  await postService.createPost(objData);
+  await postService.createPost(objData, anime);
   res.sendStatus(201);
 };
 
