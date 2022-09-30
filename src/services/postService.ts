@@ -4,10 +4,10 @@ import { animeRepository } from "../repositories/animeRepository";
 import { TypeNewAnimeData } from "../types/animesTypes";
 
 async function createPost(post: TypeNewPost, animeName: string) {
-  /* const animeId = await checkAnimeAndCreate(animeName); */
-  /* const postData = { ...post, animeId: animeId.id };
-  console.log('eu sou createpost',animeName,postData);
-  await postRepository.createPost(postData); */
+  const animeId: any = await checkAnimeAndCreate(animeName);
+  const postData = { ...post, animeId: animeId.id };
+  console.log('eu sou createpost', animeName, postData);
+  await postRepository.createPost(postData);
 };
 
 async function getAllPosts() {
@@ -44,16 +44,14 @@ async function findByIdOrFail(id: number) {
   return result;
 }; */
 
-/* async function checkAnimeAndCreate(animeName: string) {
-  const checkAnime = await animeRepository.findByName(animeName);
-  console.log(checkAnime)
+async function checkAnimeAndCreate(animeName: string) {
+  const checkAnime = await animeRepository.findByName({ name: animeName });
   if (!checkAnime) {
-    await animeRepository.createAnime(animeName);
-    return await animeRepository.findByName(animeName);
-    console.log('cai no if')
+    await animeRepository.createAnime({ name: animeName });
+    return await animeRepository.findByName({ name: animeName });
   };
-  return console.log('sou o return');
-}; */
+  return checkAnime;
+};
 
 export const postService = {
   createPost,

@@ -1,14 +1,12 @@
 import { prisma } from "../config/database";
 import { TypeNewAnimeData } from "../types/animesTypes";
 
-async function createAnime(animeName: string) {
-  /* await prisma.anime.create({ data: {animeName} }) */
-  await prisma.$queryRaw`INSERT INTO animes (name) VALUES ${animeName}`;
+async function createAnime(animeName: TypeNewAnimeData) {
+  await prisma.anime.create({ data: animeName })
 };
 
-async function findByName(animeName: string) {
-  /* const result = await prisma.anime.findFirst({where: animeName}); */
-  const result = await prisma.$queryRaw`SELECT * FROM animes WHERE name = ${animeName}`;
+async function findByName(animeName: TypeNewAnimeData) {
+  const result = await prisma.anime.findFirst({ where: animeName });
   return result;
 }
 
