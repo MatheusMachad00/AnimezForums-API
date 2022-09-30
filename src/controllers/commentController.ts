@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
 import { commentService } from '../services/commentService';
-import { TypeNewCommentData } from '../types/commentTypes';
 
 async function createComment(req: Request, res: Response) {
   const { verifiedToken } = res.locals;
   const { comment } = req.body;
-  const id = req.params;
+  const { id } = req.params;
 
   const objData = {
     comment: String(comment),
@@ -18,7 +17,14 @@ async function createComment(req: Request, res: Response) {
 };
 
 
+async function getCommentsByUser(req: Request, res: Response) {
+  const { id } = req.params;
+  const result = await commentService.getCommentsByUserId(Number(id));
+  res.send(result).status(200);
+};
+
 export const commentController = {
   createComment,
+  getCommentsByUser,
 
-}
+};

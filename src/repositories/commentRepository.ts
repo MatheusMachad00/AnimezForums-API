@@ -14,13 +14,13 @@ async function giveStar(id: number) {
   })
 };
 
-async function findPostsByUserId(userId: number) {
-  const result = await prisma.post.findMany({ where: { userId } });
+async function findCommentsByUserId(userId: number) {
+  const result = await prisma.comment.findMany({ where: { userId } });
   return result;
 };
 
 async function findById(id: number) {
-  const result = await prisma.post.findUnique({
+  const result = await prisma.comment.findUnique({
     where: { id },
   });
   return result;
@@ -29,6 +29,6 @@ async function findById(id: number) {
 export const commentRepository = {
   createComment,
   giveStar,
-  findPostsByUserId,
+  findCommentsByUserId,
   findById,
 };

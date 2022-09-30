@@ -11,7 +11,8 @@ async function giveStar(id: number) {
 };
 
 async function getCommentsByUserId(userId: number) {
-  const result = await commentRepository.findPostsByUserId(userId);
+  const result = await commentRepository.findCommentsByUserId(userId);
+  if (!result) throw { type: 'not_found', message: 'This user has no comments.' };
   return result;
 };
 
