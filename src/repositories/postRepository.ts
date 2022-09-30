@@ -15,6 +15,11 @@ async function giveStar(id: number) {
   })
 };
 
+async function getAllPosts() {
+  const result = await prisma.post.findMany();
+  return result;
+};
+
 async function findById(id: number) {
   const result = await prisma.post.findUnique({
     where: { id },
@@ -37,5 +42,6 @@ export const postRepository = {
   giveStar,
   findById,
   findPostsByUserId,
-  findPostsByAnimeId
+  findPostsByAnimeId,
+  getAllPosts
 };

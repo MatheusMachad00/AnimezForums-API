@@ -13,6 +13,18 @@ router.post(
   postController.createPost
 );
 
+router.get(
+  "/post/getAll",
+  validateToken,
+  postController.getAllPosts
+);
+
+router.get(
+  "/post/:id",
+  validateToken,
+  postController.getById
+);
+
 router.post(
   "/post/star/:id",
   validateToken,
@@ -22,13 +34,13 @@ router.post(
 router.get(
   "/post/postsByUsers/:id",
   validateToken,
-
+  postController.getPostByUser
 );
 
 router.get(
   "/post/postsByanimes/:id",
   validateToken,
-  
+
 );
 
 export default router;

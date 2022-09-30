@@ -14,6 +14,23 @@ async function createPost(req: Request, res: Response) {
   res.sendStatus(201);
 };
 
+async function getAllPosts(req: Request, res: Response) {
+  const result = await postService.getAllPosts();
+  res.send(result).status(200);
+};
+
+async function getById(req: Request, res: Response) {
+  const { id } = req.params;
+  const result = await postService.getPostById(Number(id));
+  res.send(result).status(200);
+};
+
+async function getPostByUser(req: Request, res: Response) {
+  const { id } = req.params;
+  const result = await postService.getPostsByUserId(Number(id));
+  res.send(result).status(200);
+};
+
 //pegar pelo req.params ou req.body o id da postagem?
 async function giveStar(req: Request, res: Response) {
 
@@ -21,5 +38,8 @@ async function giveStar(req: Request, res: Response) {
 
 export const postController = {
   createPost,
-  giveStar
+  giveStar,
+  getAllPosts,
+  getById,
+  getPostByUser
 };
