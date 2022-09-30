@@ -31,9 +31,10 @@ async function getPostByUser(req: Request, res: Response) {
   res.send(result).status(200);
 };
 
-//pegar pelo req.params ou req.body o id da postagem?
 async function giveStar(req: Request, res: Response) {
-
+  const { id } = req.params;
+  await postService.giveStar(Number(id));
+  res.sendStatus(200);
 };
 
 export const postController = {
