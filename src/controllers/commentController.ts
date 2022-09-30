@@ -23,8 +23,14 @@ async function getCommentsByUser(req: Request, res: Response) {
   res.send(result).status(200);
 };
 
+async function giveStar(req: Request, res: Response) {
+  const { id } = req.params;
+  await commentService.giveStar(Number(id));
+  res.sendStatus(200);
+}
+
 export const commentController = {
   createComment,
   getCommentsByUser,
-
+  giveStar,
 };

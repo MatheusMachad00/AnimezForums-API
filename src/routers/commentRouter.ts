@@ -19,5 +19,11 @@ router.get(
   commentController.getCommentsByUser
 );
 
+router.post(
+  "/comment/:id/star",
+  validateToken,
+  commentController.giveStar
+);
+
 
 export default router;
