@@ -47,11 +47,23 @@ async function findPostsByAnimeId(animeId: number) {
   return result;
 };
 
+async function postsTotalStarsByUser(userId: number) {
+  const result = await prisma.post.groupBy({
+    by: ['stars'],
+    where: { userId },
+    _sum: {
+      stars: true
+    }
+  });
+  return result;
+};
+
 export const postRepository = {
   createPost,
   giveStar,
   findById,
   findPostsByUserId,
   findPostsByAnimeId,
-  getAllPosts
+  getAllPosts,
+  postsTotalStarsByUser
 };
