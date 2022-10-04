@@ -27,7 +27,7 @@ async function login(login: TypeNewLogin) {
   const { id, username, email, avatar } = await getUserOrFail(data);
   const token = jwt.sign({ id, username, email, avatar }, String(KEY_JWT));
 
-  return token;
+  return {token, id, username, avatar};
 };
 
 
