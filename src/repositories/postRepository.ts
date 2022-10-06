@@ -17,7 +17,7 @@ async function giveStar(id: number) {
 
 async function getAllPosts() {
   const result = await prisma.$queryRaw`
-  SELECT posts.*, users.username FROM posts 
+  SELECT posts.*, users.username AS "postOwner", users.avatar AS "postOwnerAvatar" FROM posts 
   JOIN users
   ON posts."userId" = users.id`
   return result;
