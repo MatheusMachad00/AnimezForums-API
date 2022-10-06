@@ -16,7 +16,10 @@ async function giveStar(id: number) {
 };
 
 async function getAllPosts() {
-  const result = await prisma.post.findMany();
+  const result = await prisma.$queryRaw`
+  SELECT posts.*, users.username FROM posts 
+  JOIN users
+  ON posts."userId" = users.id`
   return result;
 };
 

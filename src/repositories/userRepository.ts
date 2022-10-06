@@ -25,7 +25,7 @@ async function commentsTotalStarsByUser(userId: number) {
 async function userData(id: number) {
   const result = await prisma.user.findUnique({ where: { id } });
   return result;
-}
+};
 
 export const userRepository = {
   postsTotalStarsByUser,

@@ -1,7 +1,7 @@
 import { TypeNewPostData, TypeNewPost } from "../types/postTypes";
 import { postRepository } from "../repositories/postRepository";
 import { animeRepository } from "../repositories/animeRepository";
-import { TypeNewAnimeData } from "../types/animesTypes";
+
 
 async function createPost(post: TypeNewPost, animeName: string) {
   const animeId: any = await checkAnimeAndCreate(animeName);

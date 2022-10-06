@@ -16,6 +16,10 @@ async function getAllStars(userId: number) {
   } else return (postStars[0]._sum.stars + commentStars[0]._sum.stars);
 };
 
+async function getNameById(id: number) {
+  
+};
+
 async function userData(userId: number) {
   const result = await userRepository.userData(userId);
   if (!result) throw { type: 'not_found', message: 'User not found.' };
