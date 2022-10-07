@@ -19,6 +19,16 @@ async function findCommentsByUserId(userId: number) {
   return result;
 };
 
+async function findCommentsByPostId(id: number) {
+  const result = await prisma.$queryRaw`
+  SELECT comments.*, users.username AS "commentOwner", users.avatar AS "commentOwnerAvatar" FROM comments 
+  JOIN users
+  ON comments."userId" = users.id
+  where "postId" = ${id}
+  `
+  return result;
+}
+
 async function findById(id: number) {
   const result = await prisma.comment.findUnique({
     where: { id },
@@ -31,4 +41,5 @@ export const commentRepository = {
   giveStar,
   findCommentsByUserId,
   findById,
+  findCommentsByPostId,
 };

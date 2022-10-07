@@ -1,6 +1,7 @@
 import { TypeNewPostData, TypeNewPost } from "../types/postTypes";
 import { postRepository } from "../repositories/postRepository";
 import { animeRepository } from "../repositories/animeRepository";
+import { commentRepository } from "../repositories/commentRepository";
 
 
 async function createPost(post: TypeNewPost, animeName: string) {
@@ -18,7 +19,8 @@ async function getAllPosts() {
 async function getPostById(id: number) {
   const result = await postRepository.findById(id);
   if (!result) throw { type: 'not_found', message: 'Post not found.' };
-  return result;
+  const comments = await commentRepository.findCommentsByPostId(id);
+  return { ...result, comments };
 };
 
 async function giveStar(id: number) {
