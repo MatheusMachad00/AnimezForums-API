@@ -34,6 +34,12 @@ async function findById(id: number) {
           postId: true,
           userId: true
         }
+      },
+      users: {
+        select: {
+          avatar: true,
+          username: true
+        }
       }
     }
   });
