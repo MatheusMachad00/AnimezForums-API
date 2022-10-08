@@ -39,7 +39,17 @@ async function findById(id: number) {
 };
 
 async function findPostsByUserId(userId: number) {
-  const result = await prisma.post.findMany({ where: { userId } });
+  const result = await prisma.post.findMany({ 
+    where: { userId },
+    include: {
+      users: {
+        select:{
+          avatar: true,
+          username: true,
+        }
+      }
+    } 
+  });
   return result;
 };
 
