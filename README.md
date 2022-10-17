@@ -3,7 +3,7 @@
 <Span style="color: blue; font-size:35px; font-weight:600">Authorization routes:</Span>
 
 <Span style="color: red; font-size:20px;">- Login (Post request at "/login"):</Span>
-###### Must recive an object with email and password (min 6 characters):
+###### Must receive an object with email and password (min 6 characters):
 ````json
 {
   "email": "guts@email.com",
@@ -22,7 +22,7 @@
 ````
 
 <Span style="color: red; font-size:20px;">- Signup (Post request at "/signup"):</Span>
-###### Must recive an object with username (min 1 and max 50 characters), email, password (min 6 characters) and avatar URI:
+###### Must receive an object with username (min 1 and max 50 characters), email, password (min 6 characters) and avatar URI:
 ````JSON
 {
   "username": "guts",
@@ -38,7 +38,7 @@
 <Span style="color: blue; font-size:35px; font-weight:600">Post routes:</Span>
 
 <Span style="color: red; font-size:20px;">- Create a new post (Post request at "/post/create"):</Span>
-###### Must recive a <Span style="color:orange;">header authorization</Span> with token generated on login and an object with title, anime title and description:
+###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an object with title, anime title and description:
 Token format:
 ````
 Bearer abc123456......
@@ -56,7 +56,7 @@ Object format:
 ###### Will return status code 201.
 
 <Span style="color: red; font-size:20px;">- Get all posts (Get request at "/post/getAll"):</Span>
-###### Must recive a <Span style="color:orange;">header authorization</Span> with token generated on login:
+###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login:
 Token format:
 ````
 Bearer abc123456......
@@ -89,7 +89,7 @@ Bearer abc123456......
 ````
 
 <Span style="color: red; font-size:20px;">- Get post by ID (Get request at "/post/:id"):</Span>
-###### Must recive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the post you want through URI params:
+###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the post you want through URI params:
 Token format:
 ````
 Bearer abc123456......
@@ -134,7 +134,7 @@ Bearer abc123456......
 
 
 <Span style="color: red; font-size:20px;">- Get post by user ID (Get request at "/post/postsByUsers/:id"):</Span>
-###### Must recive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the user you want through URI params:
+###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the user you want through URI params:
 Token format:
 ````
 Bearer abc123456......
@@ -171,7 +171,7 @@ Bearer abc123456......
 ````
 
 <Span style="color: red; font-size:20px;">- Give the post a star (Post request at "/post/star/:id"):</Span>
-###### Must recive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the post you want through URI params:
+###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the post you want through URI params:
 Token format:
 ````
 Bearer abc123456......
@@ -183,7 +183,7 @@ Bearer abc123456......
 <Span style="color: blue; font-size:35px; font-weight:600">Comment routes:</Span>
 
 <Span style="color: red; font-size:20px;">- Create comment (Post request at "/post/:id/createComment"):</Span>
-###### Must recive a <Span style="color:orange;">header authorization</Span> with token generated on login, an ID referring to the post you want through URI params and an object with comment:
+###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login, an ID referring to the post you want through URI params and an object with comment:
 Token format:
 ````
 Bearer abc123456......
@@ -197,7 +197,7 @@ Bearer abc123456......
 ````
 
 <Span style="color: red; font-size:20px;">- Get comment by user (Get request at "/comment/user/:id"):</Span>
-###### Must recive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the post you want through URI params:
+###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the post you want through URI params:
 Token format:
 ````
 Bearer abc123456......
@@ -224,7 +224,7 @@ Bearer abc123456......
 ````
 
 <Span style="color: red; font-size:20px;">- Give the comment a star (Post request at "/comment/:id/star"):</Span>
-###### Must recive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the comment you want through URI params:
+###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the comment you want through URI params:
 Token format:
 ````
 Bearer abc123456......
@@ -236,7 +236,7 @@ Bearer abc123456......
 <Span style="color: blue; font-size:35px; font-weight:600">User routes:</Span>
 
 <Span style="color: red; font-size:20px;">- Get user profile (Get request at "/userProfile/:id"):</Span>
-###### Must recive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the user you want through URI params:
+###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the user you want through URI params:
 Token format:
 ````
 Bearer abc123456......
