@@ -73,8 +73,8 @@ async function postsTotalStarsByUser(userId: number) {
   return result;
 };
 
-async function getPostsLiked(userId: number) {
-  const result = await prisma.postLiked.findMany({where: {userId}});
+async function getPostsLiked() {
+  const result = await prisma.postLiked.findMany();
   return result;
 };
 

@@ -15,8 +15,7 @@ async function createPost(req: Request, res: Response) {
 };
 
 async function getAllPosts(req: Request, res: Response) {
-  const { userId } = req.body
-  const result = await postService.getAllPosts(userId);
+  const result = await postService.getAllPosts();
   res.send(result).status(200);
 };
 
