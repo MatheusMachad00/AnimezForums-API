@@ -15,6 +15,10 @@ async function giveStar(id: number) {
   })
 };
 
+async function savePostLiked(postId: number, userId: number) {
+  await prisma.postLiked.create({ data: { postId, userId } });
+};
+
 async function getAllPosts() {
   const result = await prisma.$queryRaw`
   SELECT posts.*, users.username AS "postOwner", users.avatar AS "postOwnerAvatar" FROM posts 
@@ -39,16 +43,16 @@ async function findById(id: number) {
 };
 
 async function findPostsByUserId(userId: number) {
-  const result = await prisma.post.findMany({ 
+  const result = await prisma.post.findMany({
     where: { userId },
     include: {
       users: {
-        select:{
+        select: {
           avatar: true,
           username: true,
         }
       }
-    } 
+    }
   });
   return result;
 };
@@ -69,6 +73,11 @@ async function postsTotalStarsByUser(userId: number) {
   return result;
 };
 
+async function getPostsLiked(userId: number) {
+  const result = await prisma.postLiked.findMany({where: {userId}});
+  return result;
+};
+
 export const postRepository = {
   createPost,
   giveStar,
@@ -76,5 +85,7 @@ export const postRepository = {
   findPostsByUserId,
   findPostsByAnimeId,
   getAllPosts,
-  postsTotalStarsByUser
+  postsTotalStarsByUser,
+  savePostLiked,
+  getPostsLiked
 };

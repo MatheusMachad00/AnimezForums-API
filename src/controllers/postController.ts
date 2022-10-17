@@ -15,7 +15,8 @@ async function createPost(req: Request, res: Response) {
 };
 
 async function getAllPosts(req: Request, res: Response) {
-  const result = await postService.getAllPosts();
+  const { userId } = req.body
+  const result = await postService.getAllPosts(userId);
   res.send(result).status(200);
 };
 
@@ -33,7 +34,9 @@ async function getPostByUser(req: Request, res: Response) {
 
 async function giveStar(req: Request, res: Response) {
   const { id } = req.params;
-  await postService.giveStar(Number(id));
+  const { userId } = req.body;
+  let postId = id;
+  await postService.giveStar(Number(postId), Number(userId));
   res.sendStatus(200);
 };
 

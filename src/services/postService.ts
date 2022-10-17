@@ -11,9 +11,10 @@ async function createPost(post: TypeNewPost, animeName: string) {
   await postRepository.createPost(postData);
 };
 
-async function getAllPosts() {
-  const result = await postRepository.getAllPosts();
-  return result;
+async function getAllPosts(userId: number) {
+  const homeData = await postRepository.getAllPosts();
+  const postsLiked = await postRepository.getPostsLiked(userId);
+  return {homeData, postsLiked}
 };
 
 async function getPostById(id: number) {
@@ -23,9 +24,10 @@ async function getPostById(id: number) {
   return { ...result, comments };
 };
 
-async function giveStar(id: number) {
-  await findByIdOrFail(id);
-  await postRepository.giveStar(id);
+async function giveStar(postId: number, userId: number) {
+  await findByIdOrFail(postId);
+  await postRepository.giveStar(postId);
+  await postLiked(postId, userId)
 };
 
 async function getPostsByUserId(userId: number) {
@@ -53,6 +55,10 @@ async function checkAnimeAndCreate(animeName: string) {
     return await animeRepository.findByName({ name: animeName });
   };
   return checkAnime;
+};
+
+async function postLiked(postId: number, userId: number) {
+  await postRepository.savePostLiked(postId, userId);
 };
 
 export const postService = {
