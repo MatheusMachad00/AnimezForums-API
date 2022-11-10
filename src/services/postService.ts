@@ -14,7 +14,7 @@ async function createPost(post: TypeNewPost, animeName: string) {
 async function getAllPosts() {
   const homeData = await postRepository.getAllPosts();
   const postsLiked = await postRepository.getPostsLiked();
-  return {homeData, postsLiked}
+  return { homeData, postsLiked }
 };
 
 async function getPostById(id: number) {
