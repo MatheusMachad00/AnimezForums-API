@@ -1,12 +1,11 @@
-FROM node:16
+FROM node
 
-WORKDIR /usr/src/
+WORKDIR ./usr/src
 
-COPY . . 
-
-RUN npm i
-RUN npm run build 
+COPY . .
 
 EXPOSE 5000
 
-CMD ["npm", "start"] 
+RUN npm i && npm run build && npx prisma generate
+
+CMD ["npm", "start"]

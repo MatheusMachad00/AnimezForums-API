@@ -1,0 +1,24 @@
+services:
+  db_postgres_animezforums:
+    image: postgres
+    container_name: db_postgres_animezforums
+    restart: always
+    ports:
+      - 6022:5432
+    env_file:
+      - .env
+    volumes:
+      - pg_animezforums:/var/lib/postgresql/data
+
+  node_app_animezforums:
+    container_name: node_animezforums
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - db_postgres_animezforums
+    env_file:
+      - .env
+
+volumes:
+  pg_animezforums:
