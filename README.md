@@ -1,4 +1,5 @@
-<Span style="color: #24FF00; font-size:50px; font-weight: 700">AnimezForums API:</Span>
+# AnimezForum API
+
 ###### API da aplicação AnimezForums, essa API irá fornecer as principais funcionalidades da aplicação como: Cadastro, login, criar uma postagem, fazer um comentário em uma postagem e visualização do perfil de um usuário. 
 
 
