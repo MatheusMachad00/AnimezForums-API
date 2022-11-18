@@ -1,9 +1,42 @@
 <Span style="color: #24FF00; font-size:50px; font-weight: 700">AnimezForums API:</Span>
+###### API da aplicação AnimezForums, essa API irá fornecer as principais funcionalidades da aplicação como: Cadastro, login, criar uma postagem, fazer um comentário em uma postagem e visualização do perfil de um usuário. 
 
-<Span style="color: blue; font-size:35px; font-weight:600">Authorization routes:</Span>
 
-<Span style="color: red; font-size:20px;">- Login (Post request at "/login"):</Span>
-###### Must receive an object with email and password (min 6 characters):
+<Span style="color: blue; font-size:35px; font-weight:600">Como utilizar a API:</Span>
+###### O deploy ainda não está pronto, mas para rodar a API localmente você deve fazer:
+
+###### 1- Rodar o comando:
+```
+npm i
+```
+
+###### 2- Você deve criar um arquivo .env na pasta raíz com as seguintes variáveis:
+```
+DATABASE_URL=postgres://USERNAME:PASSWORD@HOSTNAME:YOUR_PORT/DATABASE_NAME
+
+JWT_SECRET=123
+
+PORT=5000
+```
+Obs: A variável JWT_SECRET pode receber qualquer valor. A variável PORT deve ser 5000.
+
+###### 3- Rodar o comando:
+```
+npx prisma migrate dev
+```
+
+###### 4- Subir o servidor:
+```
+npm run dev
+```
+
+
+<Span style="color: blue; font-size:35px; font-weight:600">Funcionamento das rotas:</Span>
+
+<Span style="font-size:30px; font-weight:600">Rotas de autenticação:</Span>
+
+<Span style="color: red; font-size:20px;">- Login (Requisição Post em "/login"):</Span>
+###### Precisa receber um objeto com email e password (min 6 characters):
 ````json
 {
   "email": "guts@email.com",
@@ -11,7 +44,7 @@
 }
 ````
 
-###### Will return status code 200 and an object with token, user ID, username and avatar URI:
+###### Irá retornar status 200 e um objeto contendo o token, user ID, username e o avatar URI:
 ````JSON
 {
   "token": "abc123......",
@@ -21,8 +54,8 @@
 }
 ````
 
-<Span style="color: red; font-size:20px;">- Signup (Post request at "/signup"):</Span>
-###### Must receive an object with username (min 1 and max 50 characters), email, password (min 6 characters) and avatar URI:
+<Span style="color: red; font-size:20px;">- Signup (Requisição Post em "/signup"):</Span>
+###### Deve receber um objeto com username (min 1 e max 50 characters), email, password (min 6 characters) e avatar URI:
 ````JSON
 {
   "username": "guts",
@@ -32,19 +65,20 @@
 }
 ````
 
-###### Will return status code 201.
+###### Irá retornar status code 201.
 
 
-<Span style="color: blue; font-size:35px; font-weight:600">Post routes:</Span>
+<Span style="font-size:30px; font-weight:600">Rotas das postagens:</Span>
 
-<Span style="color: red; font-size:20px;">- Create a new post (Post request at "/post/create"):</Span>
-###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an object with title, anime title and description:
-Token format:
+<Span style="color: red; font-size:20px;">- Criar uma nova postagem (Requisição Post em "/post/create"):</Span>
+###### Deve receber um <Span style="color:orange;">header authorization</Span> com o token gerado no login e um objeto com título, título do anime e descrição:
+
+Formato do token:
 ````
 Bearer abc123456......
 ````
 
-Object format:
+Formato do objeto:
 ````JSON
 {
   "title": "Yofukashi no Uta episode 13",
@@ -53,16 +87,17 @@ Object format:
 }
 ````
 
-###### Will return status code 201.
+###### Irá retornar status code 201.
 
-<Span style="color: red; font-size:20px;">- Get all posts (Get request at "/post/getAll"):</Span>
-###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login:
-Token format:
+<Span style="color: red; font-size:20px;">- Pegar todas as postagens (Requisição Get em "/post/getAll"):</Span>
+###### Deve receber um <Span style="color:orange;">header authorization</Span> com o token gerado no login:
+
+Formato do token:
 ````
 Bearer abc123456......
 ````
 
-###### Will return status code 200 and an array of objects:
+###### Irá retornar status code 200 e um array de objetos no formato:
 ````JSON
 [
   {
@@ -88,14 +123,15 @@ Bearer abc123456......
 ]
 ````
 
-<Span style="color: red; font-size:20px;">- Get post by ID (Get request at "/post/:id"):</Span>
-###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the post you want through URI params:
-Token format:
+<Span style="color: red; font-size:20px;">- Pegar uma postagem por ID (Requisição Get em "/post/:id"):</Span>
+###### Deve receber um <Span style="color:orange;">header authorization</Span> com o token gerado no login e um ID referenciando a postagem desejada via URI params:
+
+Formato do token:
 ````
 Bearer abc123456......
 ````
 
-###### Will return status code 200 and an object:
+###### Irá retornar status code 200 e um objeto no formato:
 ````JSON
 {
   "id": 1,
@@ -133,14 +169,15 @@ Bearer abc123456......
 ````
 
 
-<Span style="color: red; font-size:20px;">- Get post by user ID (Get request at "/post/postsByUsers/:id"):</Span>
-###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the user you want through URI params:
-Token format:
+<Span style="color: red; font-size:20px;">- Pegar todas as postagens de um usuário específico (Get request at "/post/postsByUsers/:id"):</Span>
+###### Deve receber um <Span style="color:orange;">header authorization</Span> com o token gerado no login e um user ID referenciando o usuário desejado via URI params:
+
+Formato do token:
 ````
 Bearer abc123456......
 ````
 
-###### Will return status code 200 and an object:
+###### Irá retornar status code 200 e um objeto no formato:
 ````JSON
 [
   {
@@ -170,40 +207,45 @@ Bearer abc123456......
 ]
 ````
 
-<Span style="color: red; font-size:20px;">- Give the post a star (Post request at "/post/star/:id"):</Span>
-###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the post you want through URI params:
-Token format:
+<Span style="color: red; font-size:20px;">- Dar uma estrela a uma postagem (Requisição post em "/post/star/:id"):</Span>
+###### Deve receber um <Span style="color:orange;">header authorization</Span> com o token gerado no login e um ID referenciando a postagem desejada via URI params:
+
+Formato do token:
 ````
 Bearer abc123456......
 ````
 
-###### Will return status code 201.
+###### Irá retornar status code 201.
+Obs: Rota em fase de testes.
 
+<Span style="font-size:30px; font-weight:600">Rotas de comentários:</Span>
 
-<Span style="color: blue; font-size:35px; font-weight:600">Comment routes:</Span>
+<Span style="color: red; font-size:20px;">- Criar um comentário (Requisição Post em "/post/:id/createComment"):</Span>
+###### Deve receber um <Span style="color:orange;">header authorization</Span> com o token gerado no login, um ID referenciando a postagem que irá receber o comentário via URI params e um objeto com o comentário:
 
-<Span style="color: red; font-size:20px;">- Create comment (Post request at "/post/:id/createComment"):</Span>
-###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login, an ID referring to the post you want through URI params and an object with comment:
-Token format:
+Formato do token:
 ````
 Bearer abc123456......
 ````
 
-###### Object format:
+Formato do objeto:
 ````JSON
 {
   "comment": "I liked..."
 }
 ````
 
-<Span style="color: red; font-size:20px;">- Get comment by user (Get request at "/comment/user/:id"):</Span>
-###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the post you want through URI params:
-Token format:
+###### Irá retornar status code 201.
+
+<Span style="color: red; font-size:20px;">- Pegar comentários por usuário (Requisição Get em "/comment/user/:id"):</Span>
+###### Deve receber um <Span style="color:orange;">header authorization</Span> com o token gerado no login e um user ID referenciando o usuário que você deseja obter os comentários via URI params:
+
+Formato do token:
 ````
 Bearer abc123456......
 ````
 
-###### Will return status code 200 and an array:
+###### Irá retornar status code 200 e um array de objetos no formato:
 ````JSON
 [
   {
@@ -223,26 +265,29 @@ Bearer abc123456......
 ]
 ````
 
-<Span style="color: red; font-size:20px;">- Give the comment a star (Post request at "/comment/:id/star"):</Span>
-###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the comment you want through URI params:
-Token format:
+<Span style="color: red; font-size:20px;">- Dar uma estrela a um comentário (Requisição Get em "/comment/:id/star"):</Span>
+###### Deve receber um <Span style="color:orange;">header authorization</Span> com o token gerado no login e um ID referenciando o comentário que você deseja dar a estrela via URI params:
+
+Formato do token:
 ````
 Bearer abc123456......
 ````
 
-###### Will return status code 201.
+###### Irá retornar status code 201.
+Obs: Rota em fase de testes.
 
 
-<Span style="color: blue; font-size:35px; font-weight:600">User routes:</Span>
+<Span style="font-size:30px; font-weight:600">Rotas de usuário:</Span>
 
-<Span style="color: red; font-size:20px;">- Get user profile (Get request at "/userProfile/:id"):</Span>
-###### Must receive a <Span style="color:orange;">header authorization</Span> with token generated on login and an ID referring to the user you want through URI params:
-Token format:
+<Span style="color: red; font-size:20px;">- Pegar perfil de um usuário (Requisição Get em "/userProfile/:id"):</Span>
+###### Deve receber um <Span style="color:orange;">header authorization</Span> com o token gerado no login e um user ID referenciando o usuário que você deseja via URI params:
+
+Formato do token:
 ````
 Bearer abc123456......
 ````
 
-###### Will return status code 200 and an object:
+###### Irá retornar status code 200 e um objeto no formato:
 ````JSON
 {
   "id": 1,
